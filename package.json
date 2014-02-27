@@ -1,0 +1,32 @@
+{
+  "name": "bookshelf-manager",
+  "version": "0.0.1",
+  "description": "Easily wire up models to APIs with supported for complex, nested saving.",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ericclemmons/bookshelf-manager.git"
+  },
+  "keywords": [
+    "bookshelf",
+    "repository",
+    "manager",
+    "save",
+    "crud"
+  ],
+  "author": "Eric Clemmons",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ericclemmons/bookshelf-manager/issues"
+  },
+  "devDependencies": {
+    "mocha": "~1.17.1",
+    "mysql": "~2.1.0"
+  },
+  "dependencies": {
+    "bookshelf": "~0.6.4"
+  }
+}
