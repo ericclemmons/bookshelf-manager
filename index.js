@@ -1,5 +1,1 @@
-var Manager = function() {
-
-};
-
-module.exports = Manager;
+module.exports = require('./lib/manager');
