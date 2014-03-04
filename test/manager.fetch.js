@@ -42,8 +42,26 @@ describe('manager', function() {
             'models.specs',
             'models.type',
             'dealers',
+            'dealers.cars',
+            'dealers.cars.color',
+            'dealers.cars.model',
+            'dealers.cars.features',
+            'dealers.cars.model.type',
           ]).then(function(make) {
-            console.log(JSON.stringify(make.toJSON(), null, 2));
+            var json = make.toJSON();
+
+            assert.equal('BMW',       json.name);
+            assert.equal('X5',        json.models[0].name);
+            assert.equal('4 door',    json.models[0].specs[0].name);
+            assert.equal('v6',        json.models[0].specs[1].name);
+            assert.equal('Crossover', json.models[0].type.name);
+            assert.equal('Houston',   json.dealers[0].name);
+            assert.equal('Grey',      json.dealers[0].cars[0].color.name);
+            assert.equal('X5',        json.dealers[0].cars[0].model.name);
+            assert.equal('GPS',       json.dealers[0].cars[0].features[0].name);
+            assert.equal('ABS',       json.dealers[0].cars[0].features[1].name);
+
+
             done();
           })
         ;
