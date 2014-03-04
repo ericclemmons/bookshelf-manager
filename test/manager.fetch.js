@@ -9,41 +9,41 @@ describe('manager', function() {
     Bootstrap.before(Bootstrap.tables);
     Bootstrap.before(Bootstrap.fixtures);
 
-    it('should return a model', function(done) {
+    it('should return a Model', function(done) {
       manager
-        .fetch('brand', {
+        .fetch('make', {
           name: 'BMW'
         })
-        .then(function(brand) {
-          assert.ok(brand instanceof manager.bookshelf.Model);
-          assert.equal('BMW', brand.get('name'));
+        .then(function(make) {
+          assert.ok(make instanceof manager.bookshelf.Model);
+          assert.equal('BMW', make.get('name'));
         })
         .then(done.bind(this, null), done)
       ;
     });
 
-    it('should return a collection', function(done) {
+    it('should return a Collection', function(done) {
       manager
-        .fetch('brands')
-        .then(function(brands) {
-          assert.ok(brands instanceof manager.bookshelf.Collection);
-          assert.equal(1, brands.length);
-          assert.equal('BMW', brands.get(1).get('name'));
+        .fetch('makes')
+        .then(function(makes) {
+          assert.ok(makes instanceof manager.bookshelf.Collection);
+          assert.equal(1, makes.length);
+          assert.equal('BMW', makes.get(1).get('name'));
         })
         .then(done.bind(this, null), done)
       ;
     });
 
     describe('related', function() {
-      it('should return nested models', function(done) {
+      it('should return nested Models', function(done) {
         manager
-          .fetch('brand', { name: 'BMW' }, [
-            'cars',
-            'cars.specs',
-            'cars.type',
+          .fetch('make', { name: 'BMW' }, [
+            'models',
+            'models.specs',
+            'models.type',
             'dealers',
-          ]).then(function(brand) {
-            console.log(JSON.stringify(brand.toJSON(), null, 2));
+          ]).then(function(make) {
+            console.log(JSON.stringify(make.toJSON(), null, 2));
             done();
           })
         ;

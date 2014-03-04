@@ -3,8 +3,8 @@ var Test = require('../databases/test');
 var Type = Test.Model.extend({
   tableName: 'types',
 
-  car: function() {
-    return this.belongsTo('car');
+  model: function() {
+    return this.belongsTo('model');
   }
 });
 

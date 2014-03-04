@@ -11,16 +11,16 @@ Bootstrap.before(Bootstrap.database);
 describe('manager', function() {
   describe('.get', function() {
     it('should return a Model', function() {
-      assert.ok(manager.get('car').prototype instanceof Test.Model);
+      assert.ok(manager.get('make').prototype instanceof Test.Model);
     });
 
     it('should return a Collection', function() {
-      assert.ok(manager.get('cars').prototype instanceof Test.Collection);
+      assert.ok(manager.get('makes').prototype instanceof Test.Collection);
     });
 
     it('should register in registry', function() {
-      assert.equal(manager.get('car'), Test.model('car'));
-      assert.equal(manager.get('cars'), Test.collection('cars'));
+      assert.equal(manager.get('make'), Test.model('make'));
+      assert.equal(manager.get('makes'), Test.collection('makes'));
     });
   });
 });

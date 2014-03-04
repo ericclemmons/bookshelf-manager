@@ -4,7 +4,7 @@ var Feature = Test.Model.extend({
   tableName: 'features',
 
   car: function() {
-    return this.belongsToMany('dealer.car');
+    return this.belongsToMany('car');
   }
 });
 

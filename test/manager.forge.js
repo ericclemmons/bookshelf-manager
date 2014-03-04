@@ -8,14 +8,14 @@ describe('manager', function() {
   describe('.forge', function() {
     Bootstrap.before(Bootstrap.database);
 
-    it('should create a new model', function() {
-      var brand = manager.forge('brand', {
+    it('should create a new Model', function() {
+      var make = manager.forge('make', {
         name: 'Ford'
       });
 
-      assert.ok(brand instanceof manager.bookshelf.Model);
-      assert.equal(undefined, brand.get('id'));
-      assert.equal('Ford', brand.get('name'));
+      assert.ok(make instanceof manager.bookshelf.Model);
+      assert.equal(undefined, make.get('id'));
+      assert.equal('Ford', make.get('name'));
     });
   });
 });

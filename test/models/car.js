@@ -3,12 +3,20 @@ var Test = require('../databases/test');
 var Car = Test.Model.extend({
   tableName: 'cars',
 
-  specs: function() {
-    return this.belongsToMany('spec', 'cars_specs', 'car_id', 'spec_id');
+  model: function() {
+    return this.belongsTo('model');
   },
 
-  type: function() {
-    return this.belongsTo('type');
+  color: function() {
+    return this.hasOne('color');
+  },
+
+  dealer: function() {
+    return this.belongsTo('dealer');
+  },
+
+  features: function() {
+    return this.hasMany('feature');
   }
 });
 
