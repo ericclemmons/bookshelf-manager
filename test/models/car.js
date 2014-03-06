@@ -21,7 +21,7 @@ var Car = Test.Model.extend({
 
   features: function() {
     return this.belongsToMany('feature');
-  }
+  },
 });
 
 module.exports = Car;

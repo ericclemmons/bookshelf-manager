@@ -58,6 +58,7 @@ describe('manager', function() {
             assert.equal('Grey',      json.dealers[0].cars[0].color.name);
             assert.equal('X5',        json.dealers[0].cars[0].model.name);
             assert.equal(2,           json.dealers[0].cars[0].features.length);
+
             done();
           })
         ;

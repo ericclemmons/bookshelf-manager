@@ -18,7 +18,9 @@ describe('manager', function() {
       assert.ok(manager.get('makes').prototype instanceof Test.Collection);
     });
 
-    it('should register in registry', function() {
+    it('should register in cache', function() {
+      assert.equal(manager.get('make'), manager.cache['make']);
+      assert.equal(manager.get('makes'), manager.cache['makes']);
       assert.equal(manager.get('make'), Test.model('make'));
       assert.equal(manager.get('makes'), Test.collection('makes'));
     });
