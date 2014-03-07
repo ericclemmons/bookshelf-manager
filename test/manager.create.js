@@ -119,8 +119,8 @@ describe('manager', function() {
         assert.equal(2, make.related('models').length);
         assert.ok(make.related('models').at(0).id, 'Model #1 should have ID');
         assert.ok(make.related('models').at(1).id, 'Model #2 should have ID');
-        assert.equal('X3', make.related('models').at(0).get('name'), 'Model #1 name should be X3');
-        assert.equal('X5', make.related('models').at(1).get('name'), 'Model #2 name should be X5');
+        assert.equal('X3', make.related('models').at(0).get('name'), 'Model #1 name should be X3, not ' + make.related('models').at(0).get('name'));
+        assert.equal('X5', make.related('models').at(1).get('name'), 'Model #2 name should be X5, not ' + make.related('models').at(1).get('name'));
         done();
       });
     });
