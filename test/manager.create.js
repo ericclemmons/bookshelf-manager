@@ -6,8 +6,13 @@ var manager   = require('./support/manager');
 
 describe('manager', function() {
   describe('.create', function() {
-    Bootstrap.beforeEach(Bootstrap.database);
-    Bootstrap.beforeEach(Bootstrap.tables);
+    beforeEach(function(done) {
+      Bootstrap.database().then(function() {
+        return Bootstrap.tables();
+      }).then(function() {
+        done();
+      });
+    });
 
     it('should create a new model', function(done) {
       manager.create('car').then(function(car) {

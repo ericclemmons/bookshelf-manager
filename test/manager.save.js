@@ -6,9 +6,15 @@ var manager   = require('./support/manager');
 
 describe('manager', function() {
   describe('.save', function() {
-    Bootstrap.before(Bootstrap.database);
-    Bootstrap.before(Bootstrap.tables);
-    Bootstrap.before(Bootstrap.fixtures);
+    before(function(done) {
+      Bootstrap.database().then(function() {
+        return Bootstrap.tables();
+      }).then(function() {
+        return Bootstrap.fixtures();
+      }).then(function() {
+        done();
+      });
+    });
 
     it('should return a promise', function() {
       var car     = manager.forge('car');

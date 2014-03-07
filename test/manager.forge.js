@@ -6,7 +6,11 @@ var manager   = require('./support/manager');
 
 describe('manager', function() {
   describe('.forge', function() {
-    Bootstrap.before(Bootstrap.database);
+    beforeEach(function(done) {
+      return Bootstrap.database().then(function() {
+        done();
+      });
+    });
 
     it('should create a new Model in memory', function() {
       var make = manager.forge('make', {

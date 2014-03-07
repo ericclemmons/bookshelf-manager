@@ -7,8 +7,6 @@ var Manager   = require('../lib/manager');
 var manager   = require('./support/manager');
 var Test      = require('./databases/test');
 
-Bootstrap.before(Bootstrap.database);
-
 var ManagedModel = Manager.manage(function(Bookshelf) {
   return Bookshelf.Model.extend({
     table: 'managed_model'
@@ -17,6 +15,12 @@ var ManagedModel = Manager.manage(function(Bookshelf) {
 
 describe('manager', function() {
   describe('.get', function() {
+    before(function(done) {
+      Bootstrap.database().then(function() {
+        done();
+      });
+    });
+
     it('should register in cache', function() {
       assert.equal(manager.get('make'), manager._cache['make']);
       assert.equal(manager.get('makes'), manager._cache['makes']);
