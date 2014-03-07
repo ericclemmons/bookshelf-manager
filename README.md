@@ -15,6 +15,7 @@
 
 ## Changelog
 
+- v0.0.3 - Add support for lazy-managed models.
 - v0.0.2 - If instanceof Bookshelf is not provided, instance from `Bookshelf.initialize` is used.
 - v0.0.1 - Initial Release.
 
