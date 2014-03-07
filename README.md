@@ -1,4 +1,4 @@
-# [Bookshelf Manger][0]
+# [Bookshelf Manager][0]
 
 [![Build Status](https://travis-ci.org/ericclemmons/bookshelf-manager.png)](https://travis-ci.org/ericclemmons/bookshelf-manager)
 [![Dependencies](https://david-dm.org/ericclemmons/bookshelf-manager.png)](https://david-dm.org/ericclemmons/bookshelf-manager)
