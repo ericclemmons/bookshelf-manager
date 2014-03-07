@@ -15,7 +15,8 @@
 
 ## Changelog
 
-- v0.0.1 - Initial Release
+- v0.0.2 - If instanceof Bookshelf is not provided, instance from `Bookshelf.initialize` is used.
+- v0.0.1 - Initial Release.
 
 
 ## [License][2]
