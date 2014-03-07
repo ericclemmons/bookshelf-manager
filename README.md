@@ -1,6 +1,28 @@
-bookshelf-manager
-=================
+# [Bookshelf Manger][0]
 
-Easily wire up models to APIs with supported for complex, nested saving.
+[![Build Status](https://travis-ci.org/ericclemmons/bookshelf-manager.png)](https://travis-ci.org/ericclemmons/bookshelf-manager)
+[![Dependencies](https://david-dm.org/ericclemmons/bookshelf-manager.png)](https://david-dm.org/ericclemmons/bookshelf-manager)
+[![devDependencies](https://david-dm.org/ericclemmons/bookshelf-manager/dev-status.png)](https://david-dm.org/ericclemmons/bookshelf-manager#info=devDependencies&view=table)
 
-And something else.
+> Model & Collection manager for [Bookshelf.js][1] to make it easy to create &
+> save deep, nested JSON structures from API requests.
+
+
+## API
+
+*In progress...*
+
+
+## Changelog
+
+- v0.0.1 - Initial Release
+
+
+## [License][2]
+
+Copyright (c) 2013 Eric Clemmons
+Licensed under the MIT license.
+
+[0]: https://github.com/ericclemmons/bookshelf-manager
+[1]: http://bookshelfjs.org/
+[2]: https://raw.github.com/ericclemmons/bookshelf-manager/master/LICENSE
