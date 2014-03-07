@@ -40,8 +40,8 @@ describe('manager', function() {
         { quantity: 2 },
       ]).then(function(cars) {
         assert.equal(2, cars.length, 'Cars collection should have 2 Car models');
-        assert.equal(1, cars.at(0).id, 'Car #1 should have ID 1');
-        assert.equal(2, cars.at(1).id, 'Car #2 should have ID 2');
+        assert.equal(1, cars.at(0).id, 'Car #1 should have ID 1, not ' + cars.at(0).id);
+        assert.equal(2, cars.at(1).id, 'Car #2 should have ID 2, not ' + cars.at(1).id);
         done();
       });
     })
@@ -56,7 +56,7 @@ describe('manager', function() {
       }).then(function(car) {
         assert.equal(1, car.id, 'Car should have ID 1');
         assert.equal(1, car.get('quantity'), 'Car should have quantity of 1');
-        assert.equal(1, car.related('color').id, 'Color should have ID 1');
+        assert.equal(1, car.related('color').id, 'Color should have ID 1, not ' + car.related('color').id);
         assert.equal('White', car.related('color').get('name'), 'Color name should be White');
         assert.equal('#fff', car.related('color').get('hex_value'), 'Color hex_value should be #fff');
         done();

@@ -1,3 +1,5 @@
+var Promise = require('bluebird');
+
 var Bootstrap = {
   before:     require('./bootstrap.before'),
   beforeEach: require('./bootstrap.beforeEach'),
