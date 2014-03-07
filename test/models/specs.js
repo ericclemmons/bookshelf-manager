@@ -1,7 +1,9 @@
-var Test = require('../databases/test');
+var Manager = require('../../lib/manager');
 
-var Specs = Test.Collection.extend({
-  model: 'spec'
+var Specs = Manager.manage(function(Bookshelf) {
+  return Bookshelf.Collection.extend({
+    model: 'spec'
+  });
 });
 
 module.exports = Specs;

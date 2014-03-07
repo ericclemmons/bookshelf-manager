@@ -1,27 +1,29 @@
-var Test = require('../databases/test');
+var Manager = require('../../lib/manager');
 
-var Car = Test.Model.extend({
-  tableName: 'cars',
+var Car = Manager.manage(function(Bookshelf) {
+  return Bookshelf.Model.extend({
+    tableName: 'cars',
 
-  defaults: {
-    quantity: 0,
-  },
+    defaults: {
+      quantity: 0,
+    },
 
-  color: function() {
-    return this.belongsTo('color');
-  },
+    color: function() {
+      return this.belongsTo('color');
+    },
 
-  dealer: function() {
-    return this.belongsTo('dealer');
-  },
+    dealer: function() {
+      return this.belongsTo('dealer');
+    },
 
-  model: function() {
-    return this.belongsTo('model');
-  },
+    model: function() {
+      return this.belongsTo('model');
+    },
 
-  features: function() {
-    return this.belongsToMany('feature');
-  },
+    features: function() {
+      return this.belongsToMany('feature');
+    },
+  });
 });
 
 module.exports = Car;

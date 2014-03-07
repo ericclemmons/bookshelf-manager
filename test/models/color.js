@@ -1,7 +1,9 @@
-var Test = require('../databases/test');
+var Manager = require('../../lib/manager');
 
-var Color = Test.Model.extend({
-  tableName: 'colors',
+var Color = Manager.manage(function(Bookshelf) {
+  return Bookshelf.Model.extend({
+    tableName: 'colors',
+  });
 });
 
 module.exports = Color;

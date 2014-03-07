@@ -1,15 +1,17 @@
-var Test = require('../databases/test');
+var Manager = require('../../lib/manager');
 
-var Dealer = Test.Model.extend({
-  tableName: 'dealers',
+var Dealer = Manager.manage(function(Bookshelf) {
+  return Bookshelf.Model.extend({
+    tableName: 'dealers',
 
-  make: function() {
-    return this.belongsTo('make');
-  },
+    make: function() {
+      return this.belongsTo('make');
+    },
 
-  cars: function() {
-    return this.hasMany('car');
-  }
+    cars: function() {
+      return this.hasMany('car');
+    }
+  });
 });
 
 module.exports = Dealer;

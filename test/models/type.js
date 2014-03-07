@@ -1,11 +1,13 @@
-var Test = require('../databases/test');
+var Manager = require('../../lib/manager');
 
-var Type = Test.Model.extend({
-  tableName: 'types',
+var Type = Manager.manage(function(Bookshelf) {
+  return Bookshelf.Model.extend({
+    tableName: 'types',
 
-  model: function() {
-    return this.belongsTo('model');
-  }
+    model: function() {
+      return this.belongsTo('model');
+    }
+  });
 });
 
 module.exports = Type;
