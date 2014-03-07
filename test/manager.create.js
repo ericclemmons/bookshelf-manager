@@ -118,5 +118,43 @@ describe('manager', function() {
         done();
       });
     });
+
+    it('should create a deep object', function(done) {
+      manager.create('make', {
+        name: 'BMW',
+        models: [
+          {
+            name: 'X5',
+            cost: 50000,
+            type: {
+              name: 'Crossover'
+            },
+            specs: [
+              { name: '4 door' },
+              { name: 'v6' },
+            ]
+          }
+        ]
+      }).then(function(result) {
+        return manager.fetch('make', { name: 'BMW' }, ['models.type', 'models.specs']).then(function(actual) {
+          assert.equal(
+            actual.related('models').length,
+            result.related('models').length
+          );
+
+          assert.equal(
+            actual.related('models').at(0).related('specs').length,
+            result.related('models').at(0).related('specs').length
+          );
+
+          assert.equal(
+            JSON.stringify(actual.related('models').at(0).related('type').toJSON(), null, 2),
+            JSON.stringify(result.related('models').at(0).related('type').toJSON(), null, 2)
+          );
+
+          done();
+        });
+      });
+    });
   });
 });
