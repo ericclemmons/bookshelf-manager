@@ -1,6 +1,6 @@
 var assert = require('assert');
 
-var Bootstrap = require('./support/Bootstrap');
+var Bootstrap = require('./support/bootstrap');
 var manager   = require('./support/manager');
 
 describe('manager', function() {

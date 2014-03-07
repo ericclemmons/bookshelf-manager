@@ -1,10 +1,10 @@
 var assert    = require('assert');
-var Manager   = require('../index.js');
 var path      = require('path');
 var Promise   = require('bluebird');
+
 var Test      = require('./databases/test');
 var Bootstrap = require('./support/bootstrap');
-var manager   = new Manager(Test, path.join(__dirname, 'models'));
+var manager   = require('./support/manager');
 
 Bootstrap.before(Bootstrap.database);
 
