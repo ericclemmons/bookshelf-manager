@@ -44,4 +44,12 @@ describe('Manager', function() {
       assert.equal(first, manager.bookshelf);
     });
   });
+
+  describe('.initialize', function() {
+    it('should be fluent', function() {
+      var manager = new Manager(path.join(__dirname, 'models'));
+
+      assert.equal(manager, manager.initialize(Test));
+    });
+  });
 });
