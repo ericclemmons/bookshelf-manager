@@ -21,6 +21,21 @@ describe('manager', function() {
       });
     });
 
+    it('should throw an error if not initialized', function() {
+      var manager   = new Manager(path.join(__dirname, 'models'));
+      var expected  = 'Manager has not been initialized with instance of Bookshelf';
+
+      assert.throws(function() { manager.create('make'); }, expected);
+      assert.throws(function() { manager.get('make'); }, expected);
+      assert.throws(function() { manager.fetch('make'); }, expected);
+      assert.throws(function() { manager.forge('make'); }, expected);
+      assert.throws(function() { manager.save('make'); }, expected);
+    });
+
+    it('should throw an error if file not found', function() {
+      assert.throws(function() { manager.get('fake'); }, /Could not find module/);
+    });
+
     it('should register in cache', function() {
       assert.equal(manager.get('make'), manager._cache['make']);
       assert.equal(manager.get('makes'), manager._cache['makes']);
