@@ -50,7 +50,7 @@ describe('manager', function() {
           ]).then(function(make) {
             var json = make.toJSON();
 
-            console.log(JSON.stringify(json, null, 2));
+            // console.log(JSON.stringify(json, null, 2));
 
             assert.equal('BMW',       json.name);
             assert.equal('X5',        json.models[0].name);
