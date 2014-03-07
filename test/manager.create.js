@@ -39,6 +39,8 @@ describe('manager', function() {
         { quantity: 1 },
         { quantity: 2 },
       ]).then(function(cars) {
+        cars.sortBy('id');
+
         assert.equal(2, cars.length, 'Cars collection should have 2 Car models');
         assert.equal(1, cars.at(0).id, 'Car #1 should have ID 1, not ' + cars.at(0).id);
         assert.equal(2, cars.at(1).id, 'Car #2 should have ID 2, not ' + cars.at(1).id);
@@ -92,6 +94,8 @@ describe('manager', function() {
         ],
         quantity: 1
       }).then(function(car) {
+        car.related('features').sortBy('name');
+
         assert.equal(1, car.id, 'Car should have ID 1');
         assert.equal(2, car.related('features').length, 'There should be 2 features');
         assert.ok(car.related('features').at(0).id, 'Feature #1 should have ID');
@@ -109,6 +113,8 @@ describe('manager', function() {
           { name: 'X5' },
         ]
       }).then(function(make) {
+        make.related('models').sortBy('name');
+
         assert.equal(1, make.id, 'Make should have ID 1');
         assert.equal(2, make.related('models').length);
         assert.ok(make.related('models').at(0).id, 'Model #1 should have ID');
