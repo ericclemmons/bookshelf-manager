@@ -104,5 +104,19 @@ describe('manager', function() {
         done();
       });
     });
+
+    it('should orphan models in collection', function(done) {
+      manager.fetch('car', { id: 1 }, 'features').then(function(car) {
+        assert.equal(2, car.related('features').length, 'Car should have 2 existing features');
+
+        return manager.save(car, {
+          id: 1,
+          features: []
+        }).then(function(car) {
+          assert.equal(0, car.related('features').length, 'Car should have all features removed');
+          done();
+        });
+      });
+    });
   });
 });
