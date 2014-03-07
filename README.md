@@ -15,6 +15,7 @@
 
 ## Changelog
 
+- v0.0.5 - Improve error handling for unintialized instances & missing files
 - v0.0.4 - Improve `.attach` and `.detach`
 - v0.0.3 - Add support for lazy-managed models.
 - v0.0.2 - If instanceof Bookshelf is not provided, instance from `Bookshelf.initialize` is used.
