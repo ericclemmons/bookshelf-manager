@@ -113,7 +113,7 @@ describe('manager', function() {
           id: 1,
           features: []
         }).then(function(car) {
-          assert.equal(0, car.related('features').length, 'Car should have all features removed');
+          assert.equal(0, car.related('features').length, 'Car should have all features removed, found: ' + car.related('features').toJSON());
           done();
         });
       });
