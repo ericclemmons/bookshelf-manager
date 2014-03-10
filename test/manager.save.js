@@ -111,7 +111,7 @@ describe('manager', function() {
       });
     });
 
-    it.only('should ignore _pivot_ keys', function(done) {
+    it('should ignore _pivot_ keys', function(done) {
       manager.fetch('car', { id: 1 }, 'features').then(function(car) {
         var feature = car.related('features').at(0);
         var json    = feature.toJSON();
