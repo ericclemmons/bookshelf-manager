@@ -9,7 +9,7 @@ var Dealer = Manager.manage(function(Bookshelf) {
     },
 
     cars: function() {
-      return this.hasMany('car');
+      return this.hasMany('car', 'dealer_id');
     }
   });
 });

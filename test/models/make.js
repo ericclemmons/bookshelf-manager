@@ -9,7 +9,7 @@ var Make = Manager.manage(function(Bookshelf) {
     },
 
     dealers: function() {
-      return this.hasMany('dealer');
+      return this.hasMany('dealer', 'make_id');
     },
   });
 });
