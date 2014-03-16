@@ -159,6 +159,10 @@ describe('manager', function() {
           return manager.save(make, expected);
         }).then(function(make) {
           assert.equal(JSON.stringify(expected), JSON.stringify(make.toJSON()));
+
+          return manager.knex('models_specs').select();
+        }).then(function(results) {
+          assert.equal(2, results.length, 'Expected only 2 rows in `models_specs`, not ' + results.length);
           done();
         })
       ;
