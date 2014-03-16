@@ -138,5 +138,30 @@ describe('manager', function() {
         });
       });
     });
+
+    it('should support original fetched response', function(done) {
+      var expected;
+
+      manager
+        .fetch('make', { name: 'BMW' }, [
+          'models',
+          'models.specs',
+          'models.type',
+          'dealers',
+          'dealers.cars',
+          'dealers.cars.color',
+          'dealers.cars.model',
+          'dealers.cars.features',
+          'dealers.cars.model.type',
+        ]).then(function(make) {
+          expected = make.toJSON();
+
+          return manager.save(make, expected);
+        }).then(function(make) {
+          assert.equal(JSON.stringify(expected), JSON.stringify(make.toJSON()));
+          done();
+        })
+      ;
+    })
   });
 });

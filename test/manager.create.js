@@ -61,7 +61,7 @@ describe('manager', function() {
         },
         quantity: 1
       }).then(function(car) {
-        assert.equal(1, car.id, 'Car should have ID 1');
+        assert.equal(1, car.id, 'Car should have ID 1, not ' + car.id);
         assert.equal(1, car.get('quantity'), 'Car should have quantity of 1');
         assert.equal(1, car.related('color').id, 'Color should have ID 1, not ' + car.related('color').id);
         assert.equal('White', car.related('color').get('name'), 'Color name should be White');
@@ -83,7 +83,7 @@ describe('manager', function() {
           },
           quantity: 2
         }).then(function(car) {
-          assert.equal(color.id, car.related('color').id, 'Color ID should stay the same')
+          assert.equal(color.id, car.related('color').id, 'Color ID should stay the same, not ' + car.related('color').id);
           assert.equal('Grey', car.related('color').get('name'), 'Color name should be Grey');
           assert.equal('#666', car.related('color').get('hex_value'), 'Color hex_value should be #666');
           done();
@@ -122,8 +122,8 @@ describe('manager', function() {
 
         assert.equal(1, make.id, 'Make should have ID 1');
         assert.equal(2, make.related('models').length);
-        assert.ok(make.related('models').at(0).id, 'Model #1 should have ID');
-        assert.ok(make.related('models').at(1).id, 'Model #2 should have ID');
+        assert.ok(make.related('models').at(0).id, 'Model #1 should have ID, not ' + make.related('models').at(0).id);
+        assert.ok(make.related('models').at(1).id, 'Model #2 should have ID, not ' + make.related('models').at(1).id);
         assert.equal('X3', make.related('models').at(0).get('name'), 'Model #1 name should be X3, not ' + make.related('models').at(0).get('name'));
         assert.equal('X5', make.related('models').at(1).get('name'), 'Model #2 name should be X5, not ' + make.related('models').at(1).get('name'));
         done();
