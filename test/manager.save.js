@@ -1,5 +1,6 @@
 var assert  = require('assert');
 var Promise = require('bluebird');
+var deep    = require('deep-diff');
 
 var Bootstrap = require('./support/bootstrap');
 var manager   = require('./support/manager');
@@ -158,7 +159,9 @@ describe('manager', function() {
 
           return manager.save(make, expected);
         }).then(function(make) {
-          assert.equal(JSON.stringify(expected), JSON.stringify(make.toJSON()));
+          var diffs = deep.diff(expected, make.toJSON()) || [];
+
+          assert.equal(0, diffs.length, diffs);
 
           return manager.knex('models_specs').select();
         }).then(function(results) {

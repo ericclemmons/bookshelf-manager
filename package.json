@@ -29,6 +29,7 @@
   "dependencies": {
     "bookshelf": "~0.6.4",
     "bluebird": "~1.0.7",
-    "hooker": "^0.2.3"
+    "hooker": "^0.2.3",
+    "deep-diff": "^0.1.4"
   }
 }
