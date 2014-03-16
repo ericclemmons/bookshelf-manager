@@ -15,6 +15,7 @@
 
 ## Changelog
 
+- v0.0.7 - Attempt to use existing, eager-loaded models rather than re-fetch
 - v0.0.6 - Ignore `_pivot_` keys
 - v0.0.5 - Improve error handling for unintialized instances & missing files
 - v0.0.4 - Improve `.attach` and `.detach`
