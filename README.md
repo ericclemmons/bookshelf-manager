@@ -15,6 +15,7 @@
 
 ## Changelog
 
+- v0.0.10 - Enforce `belongsToMany` IDs
 - v0.0.9 - Destroy removed `hasMany` models
 - v0.0.8 - Fetch empty collections
 - v0.0.7 - Attempt to use existing, eager-loaded models rather than re-fetch
