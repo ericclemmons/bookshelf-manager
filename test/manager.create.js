@@ -155,12 +155,33 @@ describe('manager', function() {
           );
 
           assert.equal(
-            JSON.stringify(actual.related('models').at(0).related('type').toJSON(), null, 2),
-            JSON.stringify(result.related('models').at(0).related('type').toJSON(), null, 2)
+            actual.related('models').at(0).related('type').id,
+            result.related('models').at(0).related('type').id
+          );
+
+          assert.equal(
+            actual.related('models').at(0).related('type').name,
+            result.related('models').at(0).related('type').name
           );
 
           done();
         });
+      });
+    });
+
+    it('should set scalar attributes before saving new models', function () {
+      var ValidatedModel = manager.get('model').extend({
+        initialize: function() {
+          this.on('saving', this.validateSave);
+        },
+
+        validateSave: function() {
+          assert(typeof this.get('name') === 'string', 'Model name must be a string, not ' + typeof this.get('name'));
+        }
+      });
+
+      return manager.create(ValidatedModel, { name: 'test' }).then(function(model) {
+        assert.equal('test', model.get('name'), 'Model should have a name of `test`, not `' + model.get('name') + '`');
       });
     });
   });
