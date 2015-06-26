@@ -1,75 +1,82 @@
 var assert    = require('assert');
 var path      = require('path');
-var Promise   = require('bluebird');
 
+var Manager = require('../lib/manager');
 var Bootstrap = require('./support/bootstrap');
-var Manager   = require('../lib/manager');
-var manager   = require('./support/manager');
-var Test      = require('./databases/test');
-
-var ManagedModel = Manager.manage(function(Bookshelf) {
-  return Bookshelf.Model.extend({
-    table: 'managed_model'
-  });
-});
 
 describe('manager', function() {
   describe('.get', function() {
-    before(function(done) {
-      Bootstrap.database().then(function() {
-        done();
+    var manager, bookshelf;
+
+    describe('if no root was specified', function() {
+      before(function() {
+        bookshelf = Bootstrap.database();
+        manager = new Manager(bookshelf);
+        Bootstrap.models(manager);
+      });
+
+      describe('with a name', function() {
+        describe('if the model hasn\'t been registered yet', function() {
+          it('should throw an error', function() {
+            assert.throws(function() { manager.get('fake'); }, 'No model named `fake` has been registered and no model directory was specified');
+          });
+        });
+
+        describe('if the model has been registered', function() {
+          it('should return the Model', function() {
+            assert.ok(manager.get('make').prototype instanceof bookshelf.Model);
+          });
+        });
+      });
+
+      describe('with a Model', function() {
+        it('should return a Model', function() {
+          var Model = bookshelf.Model.extend({});
+
+          assert.equal(Model, manager.get(Model));
+        });
+
+        it('should return a Collection', function() {
+          var Collection = bookshelf.Collection.extend();
+
+          assert.equal(Collection, manager.get(Collection));
+        });
       });
     });
 
-    it('should throw an error if not initialized', function() {
-      var manager   = new Manager(path.join(__dirname, 'models'));
-      var expected  = 'Manager has not been initialized with instance of Bookshelf';
+    describe('if root was specified', function() {
 
-      assert.throws(function() { manager.create('make'); }, expected);
-      assert.throws(function() { manager.get('make'); }, expected);
-      assert.throws(function() { manager.fetch('make'); }, expected);
-      assert.throws(function() { manager.forge('make'); }, expected);
-      assert.throws(function() { manager.save('make'); }, expected);
-    });
-
-    it('should throw an error if file not found', function() {
-      assert.throws(function() { manager.get('fake'); }, /Could not find module/);
-    });
-
-    it('should register in cache', function() {
-      assert.equal(manager.get('make'), manager._cache['make']);
-      assert.equal(manager.get('makes'), manager._cache['makes']);
-      assert.equal(manager.get('make'), Test.model('make'));
-      assert.equal(manager.get('makes'), Test.collection('makes'));
-    });
-
-    describe('with a name', function() {
-      it('should return a Model', function() {
-        assert.ok(manager.get('make').prototype instanceof Test.Model);
+      before(function() {
+        bookshelf = Bootstrap.database();
+        manager = Bootstrap.manager(bookshelf);
       });
 
-      it('should return a Collection', function() {
-        assert.ok(manager.get('makes').prototype instanceof Test.Collection);
-      });
-    });
-
-    describe('with a Model', function() {
-      it('should return a Model', function() {
-        var Model = Test.Model.extend({});
-
-        assert.equal(Model, manager.get(Model));
+      it('should throw an error if file not found', function() {
+        assert.throws(function() { manager.get('fake'); }, /Could not find module/);
       });
 
-      it('should return a Collection', function() {
-        var Collection = Test.Collection.extend();
+      describe('with a name', function() {
+        it('should return a Model', function() {
+          assert.ok(manager.get('make').prototype instanceof bookshelf.Model);
+        });
 
-        assert.equal(Collection, manager.get(Collection));
+        it('should return a Collection', function() {
+          assert.ok(manager.get('makes').prototype instanceof bookshelf.Collection);
+        });
       });
-    });
 
-    describe('with a managed Model', function() {
-      it('should return a Model for Bookshelf instance', function() {
-        assert.ok(manager.get(ManagedModel).prototype instanceof Test.Model);
+      describe('with a Model', function() {
+        it('should return a Model', function() {
+          var Model = bookshelf.Model.extend({});
+
+          assert.equal(Model, manager.get(Model));
+        });
+
+        it('should return a Collection', function() {
+          var Collection = bookshelf.Collection.extend();
+
+          assert.equal(Collection, manager.get(Collection));
+        });
       });
     });
   });

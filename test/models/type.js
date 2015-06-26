@@ -1,6 +1,4 @@
-var Manager = require('../../lib/manager');
-
-var Type = Manager.manage(function(Bookshelf) {
+var Type = function(Bookshelf) {
   return Bookshelf.Model.extend({
     tableName: 'types',
 
@@ -8,6 +6,6 @@ var Type = Manager.manage(function(Bookshelf) {
       return this.belongsTo('model');
     }
   });
-});
+};
 
 module.exports = Type;

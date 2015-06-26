@@ -1,55 +1,32 @@
 var assert    = require('assert');
-var Bookshelf = require('bookshelf');
-var path      = require('path');
+var fs        = require('fs');
 
+var Bootstrap = require('./support/bootstrap');
 var Manager = require('../lib/manager');
-var Test    = require('./databases/test');
 
 describe('Manager', function() {
-  describe('when instantiated', function() {
-    it('should require path as first argument', function() {
+  describe('constructor', function() {
+    it('should require a Bookshelf instance as the first argument', function() {
       assert.throws(function() {
-        new Manager();
-      }, 'Manager requires a path to model directory');
-    });
+        return new Manager();
+      }, /Manager requires a Bookshelf instance/);
 
-    it('should accept a Bookshelf instance as second argument', function() {
-      var manager = new Manager(path.join(__dirname, 'models'), Test);
+      assert.throws(function() {
+        return new Manager({ invalid: 'object' });
+      }, /Manager requires a Bookshelf instance/);
 
-      assert.equal(Test, manager.bookshelf);
-    });
-
-    it('should initialize after Bookshelf only once', function() {
-      var manager = new Manager(path.join(__dirname, 'models'));
-
-      assert.ok(manager.root);
-      assert.ok(!manager.bookshelf);
-      assert.ok(!manager.knex);
-      assert.ok(!manager.schema);
-
-      var first = Bookshelf.initialize({
-        client:      'mysql',
-        connection:  { user: 'root' }
+      assert.doesNotThrow(function() {
+        return new Manager(Bootstrap.database());
       });
-
-      assert.ok(manager.bookshelf);
-      assert.ok(manager.knex);
-      assert.ok(manager.schema);
-
-      var second = Bookshelf.initialize({
-        client:      'mysql',
-        connection:  { user: 'root' }
-      });
-
-      assert.equal(first, manager.bookshelf);
     });
-  });
 
-  describe('.initialize', function() {
-    it('should be fluent', function() {
-      var manager = new Manager(path.join(__dirname, 'models'));
+    describe('if second options argument is specified', function() {
 
-      assert.equal(manager, manager.initialize(Test));
+      it('should set the root model directory on the manager instance if provided on the options argument', function() {
+        var manager = Bootstrap.manager(Bootstrap.database());
+        assert(manager.root);
+        assert(fs.lstatSync(manager.root).isDirectory());
+      });
     });
   });
 });

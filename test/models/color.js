@@ -1,9 +1,7 @@
-var Manager = require('../../lib/manager');
-
-var Color = Manager.manage(function(Bookshelf) {
+var Color = function(Bookshelf) {
   return Bookshelf.Model.extend({
-    tableName: 'colors',
+    tableName: 'colors'
   });
-});
+};
 
 module.exports = Color;

@@ -1,6 +1,4 @@
-var Manager = require('../../lib/manager');
-
-var Feature = Manager.manage(function(Bookshelf) {
+var Feature = function(Bookshelf) {
   return Bookshelf.Model.extend({
     tableName: 'features',
 
@@ -8,6 +6,6 @@ var Feature = Manager.manage(function(Bookshelf) {
       return this.belongsToMany('car');
     }
   });
-});
+};
 
 module.exports = Feature;

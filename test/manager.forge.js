@@ -1,15 +1,14 @@
 var assert = require('assert');
 
 var Bootstrap = require('./support/bootstrap');
-var manager   = require('./support/manager');
-
 
 describe('manager', function() {
   describe('.forge', function() {
-    beforeEach(function(done) {
-      return Bootstrap.database().then(function() {
-        done();
-      });
+    var manager;
+
+    before(function() {
+      manager = Bootstrap.manager(Bootstrap.database());
+      Bootstrap.models(manager);
     });
 
     it('should create a new Model in memory', function() {
