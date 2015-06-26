@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "bluebird": "^2.9.30",
-    "bookshelf": "^0.8.1",
+    "bookshelf": "git://github.com/tgriesser/bookshelf#e8b2c1461afc34415dc88e2bfcba32eae0afa5e9",
     "deep-diff": "^0.3.2",
     "knex": "^0.8.6",
     "mocha": "^2.2.5",
