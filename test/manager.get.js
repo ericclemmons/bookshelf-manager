@@ -63,6 +63,10 @@ describe('manager', function() {
         it('should return a Collection', function() {
           assert.ok(manager.get('makes').prototype instanceof bookshelf.Collection);
         });
+
+        it('should register the model in the registry', function() {
+          assert.ok(bookshelf.model('make').prototype instanceof bookshelf.Model);
+        });
       });
 
       describe('with a Model', function() {
