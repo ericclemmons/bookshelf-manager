@@ -172,5 +172,39 @@ describe('manager', function() {
         assert.equal('test', model.get('name'), 'Model should have a name of `test`, not `' + model.get('name') + '`');
       });
     });
+
+    it('should support transactions', function() {
+      return manager.create('color', {
+        name: 'White',
+        hex_value: '#fff'
+      }).then(function(color) {
+        return manager.bookshelf.transaction(function(t) {
+          return manager.create('car', {
+            color: {
+              id: color.id,
+              name: 'Grey',
+              hex_value: '#666'
+            },
+            quantity: 2
+          }, {
+            transacting: t
+          }).then(function(car) {
+            assert.equal(color.id, car.related('color').id, 'Color ID should stay the same, not ' + car.related('color').id);
+            assert.equal('Grey', car.related('color').get('name'), 'Color name should be Grey');
+            assert.equal('#666', car.related('color').get('hex_value'), 'Color hex_value should be #666');
+            throw new Error('test');
+          });
+        }).catch(function(err) {
+          if (!(err instanceof assert.AssertionError)) {
+            return manager.fetch('color', { id: color.id }).then(function(color) {
+              assert.equal('White', color.get('name'), 'Color name should be White');
+              assert.equal('#fff', color.get('hex_value'), 'Color hex_value should be #fff');
+            });
+          } else {
+            throw err;
+          }
+        });
+      });
+    });
   });
 });

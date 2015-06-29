@@ -7,7 +7,7 @@ describe('manager', function() {
   describe('.save', function() {
     var manager;
 
-    before(function() {
+    beforeEach(function() {
       manager = Bootstrap.manager(Bootstrap.database());
       Bootstrap.models(manager);
       return Bootstrap.tables(manager)
@@ -27,7 +27,7 @@ describe('manager', function() {
       var car = manager.forge('car');
 
       return manager.save(car).then(function(car) {
-        assert.equal(3, car.id, 'Car should have an ID of 3, not ' + car.id);
+        assert.equal(2, car.id, 'Car should have an ID of 2, not ' + car.id);
       });
     });
 
@@ -159,6 +159,33 @@ describe('manager', function() {
         }).then(function(results) {
           assert.equal(2, results.length, 'Expected only 2 rows in `models_specs`, not ' + results.length);
         });
+    });
+
+    it('should support transactions', function() {
+      return manager.bookshelf.transaction(function(t) {
+        return manager.fetch('car', { id: 1 }, 'features', { transacting: t }).then(function(car) {
+          return manager.save(car, {
+            id: 1,
+            quantity: 2,
+            features: []
+          }, {
+            transacting: t
+          }).then(function(car) {
+            assert.equal(2, car.get('quantity', 'Car should have quantity 2, got: ' + car.get('quantity')));
+            assert.equal(0, car.related('features').length, 'Car should have all features removed, found: ' + car.related('features').toJSON());
+            throw new Error('test');
+          });
+        });
+      }).catch(function(err) {
+        if (!(err instanceof assert.AssertionError)) {
+          return manager.fetch('car', { id: 1 }, 'features').then(function(car) {
+            assert.equal(1, car.get('quantity', 'Car should have quantity 1, got: ' + car.get('quantity')));
+            assert.equal(2, car.related('features').length, 'Car should have 2 existing features');
+          });
+        } else {
+          throw err;
+        }
+      });
     });
   });
 });
