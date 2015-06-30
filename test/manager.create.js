@@ -173,24 +173,55 @@ describe('manager', function() {
       });
     });
 
-    it('should set foreign keys before saving child models', function() {
-      var manager = Bootstrap.manager(Bootstrap.database());
-      manager.register(require('./models/model')(manager.bookshelf).extend({
-        initialize: function() {
-          this.on('saving', this.validateSave);
-        },
+    describe('foreign key support', function() {
 
-        validateSave: function() {
-          assert.equal('number', typeof this.get('make_id'), 'Model make_id must be a number, not ' + typeof this.get('make_id'));
-        }
-      }), 'model');
-      return Bootstrap.tables(manager).then(function() {
-        return manager.create('make', {
-          name: 'BMW',
-          models: [
-            { name: 'X3' },
-            { name: 'X5' }
-          ]
+      it('should set foreign keys before saving child models', function() {
+        var manager = Bootstrap.manager(Bootstrap.database());
+        manager.register(require('./models/model')(manager.bookshelf).extend({
+          initialize: function() {
+            this.on('saving', this.validateSave);
+          },
+
+          validateSave: function() {
+            assert.equal('number', typeof this.get('make_id'), 'Model make_id must be a number, not ' + typeof this.get('make_id'));
+          }
+        }), 'model');
+        return Bootstrap.tables(manager).then(function() {
+          return manager.create('make', {
+            name: 'BMW',
+            models: [
+              { name: 'X3' },
+              { name: 'X5' }
+            ]
+          });
+        });
+      });
+
+      it('even when the foreign key is the same as the name of the relation', function() {
+        var manager = Bootstrap.manager(Bootstrap.database());
+        manager.register(manager.bookshelf.Model.extend({
+          tableName: 'models',
+
+          make_id: function() {
+            return this.belongsTo('make');
+          },
+
+          initialize: function() {
+            this.on('saving', this.validateSave);
+          },
+
+          validateSave: function() {
+            assert.equal('number', typeof this.get('make_id'), 'Model make_id must be a number, not ' + typeof this.get('make_id'));
+          }
+        }), 'model');
+        return Bootstrap.tables(manager).then(function() {
+          return manager.create('make', {
+            name: 'BMW',
+            models: [
+              { name: 'X3' },
+              { name: 'X5' }
+            ]
+          });
         });
       });
     });
