@@ -259,5 +259,24 @@ describe('manager', function() {
         });
       });
     });
+
+    it('should not create empty models when a related attribute is present but set to null', function() {
+      var manager = Bootstrap.manager(Bootstrap.database());
+      manager.register(require('./models/type')(manager.bookshelf).extend({
+        initialize: function() {
+          this.on('saving', this.validateSave);
+        },
+
+        validateSave: function() {
+          throw new Error('should not save models for null attributes!');
+        }
+      }), 'type');
+      return Bootstrap.tables(manager).then(function() {
+        return manager.create('model', {
+          name: 'X5',
+          type: null
+        });
+      });
+    });
   });
 });

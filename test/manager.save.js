@@ -187,5 +187,17 @@ describe('manager', function() {
         }
       });
     });
+
+    it('should set belongsTo foreign keys to null if a related attribute is present but set to null', function() {
+
+      return manager.fetch('model', { id: 1 }).then(function(model) {
+        return manager.save(model, {
+          name: 'X5',
+          type: null
+        }).then(function(model) {
+          assert.equal(null, model.get('type_id'));
+        });
+      });
+    });
   });
 });
