@@ -1,9 +1,7 @@
-var Manager = require('../../lib/manager');
-
-var Cars = Manager.manage(function(Bookshelf) {
+var Cars = function(Bookshelf) {
   return Bookshelf.Collection.extend({
-    model: 'car',
+    model: 'car'
   });
-});
+};
 
 module.exports = Cars;

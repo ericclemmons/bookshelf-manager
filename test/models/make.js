@@ -1,6 +1,4 @@
-var Manager = require('../../lib/manager');
-
-var Make = Manager.manage(function(Bookshelf) {
+var Make = function(Bookshelf) {
   return Bookshelf.Model.extend({
     tableName: 'makes',
 
@@ -10,8 +8,8 @@ var Make = Manager.manage(function(Bookshelf) {
 
     dealers: function() {
       return this.hasMany('dealer', 'make_id');
-    },
+    }
   });
-});
+};
 
 module.exports = Make;

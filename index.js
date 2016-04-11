@@ -1,1 +1,1 @@
-module.exports = require('./lib/manager');
+module.exports = require('./lib/manager').plugin;

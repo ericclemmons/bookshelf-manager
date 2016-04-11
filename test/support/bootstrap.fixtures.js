@@ -1,11 +1,11 @@
 var Promise = require('bluebird');
-var manager = require('./manager');
 
-module.exports = function() {
+module.exports = function(manager) {
+
   var make      = manager.forge('make',    { name: 'BMW' });
   var model     = manager.forge('model',   { name: 'X5', cost: '50000.00' });
   var type      = manager.forge('type',    { name: 'Crossover' });
-  var specs     = manager.forge('specs',   [ { name: '4 door'}, { name: 'v6' } ]);
+  var specs     = manager.forge('specs',   [ { name: '4 door' }, { name: 'v6' } ]);
   var color     = manager.forge('color',   { name: 'Grey', hex_value: '#666' });
   var dealer    = manager.forge('dealer',  { name: 'Houston', zip_code: '77002' });
   var features  = manager.forge('features', [ { name: 'GPS', cost: '500' }, { name: 'ABS', cost: '1250' }]);

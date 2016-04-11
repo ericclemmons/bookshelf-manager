@@ -1,9 +1,7 @@
-var Manager = require('../../lib/manager');
-
-var Features = Manager.manage(function(Bookshelf) {
+var Features = function(Bookshelf) {
   return Bookshelf.Collection.extend({
-    model: 'feature',
+    model: 'feature'
   });
-});
+};
 
 module.exports = Features;

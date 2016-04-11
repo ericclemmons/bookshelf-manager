@@ -1,6 +1,6 @@
 {
   "name": "bookshelf-manager",
-  "version": "0.0.10",
+  "version": "0.1.0",
   "description": "Easily wire up models to APIs with supported for complex, nested saving.",
   "main": "index.js",
   "scripts": {
@@ -23,13 +23,16 @@
     "url": "https://github.com/ericclemmons/bookshelf-manager/issues"
   },
   "devDependencies": {
-    "mocha": "~1.17.1",
-    "mysql": "~2.1.0"
+    "bluebird": "^2.9.30",
+    "bookshelf": "^0.8.2",
+    "deep-diff": "^0.3.2",
+    "knex": "^0.8.6",
+    "mocha": "^2.2.5",
+    "sqlite3": "^3.0.8"
   },
-  "dependencies": {
-    "bookshelf": "~0.6.4",
-    "bluebird": "~1.0.7",
-    "hooker": "^0.2.3",
-    "deep-diff": "^0.1.4"
+  "peerDependencies": {
+    "bluebird": "2.x",
+    "bookshelf": "^0.8.0",
+    "knex": "^0.8.0"
   }
 }

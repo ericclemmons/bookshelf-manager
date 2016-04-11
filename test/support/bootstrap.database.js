@@ -1,9 +1,11 @@
-var MySql = require('../databases/mysql');
+var Bookshelf = require('bookshelf');
+var Knex = require('knex');
 
 module.exports = function() {
-  return MySql.knex.raw('DROP DATABASE IF EXISTS bookshelf_manager_test')
-    .then(function() {
-      return MySql.knex.raw('CREATE DATABASE bookshelf_manager_test')
-    })
-  ;
+  return Bookshelf(Knex({
+    client:      'sqlite3',
+    connection:  {
+      filename: ':memory:'
+    }
+  }));
 };
