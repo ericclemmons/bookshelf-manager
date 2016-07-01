@@ -23,12 +23,12 @@
     "url": "https://github.com/ericclemmons/bookshelf-manager/issues"
   },
   "devDependencies": {
-    "bluebird": "^2.9.30",
-    "bookshelf": "^0.8.2",
-    "deep-diff": "^0.3.2",
-    "knex": "^0.8.6",
-    "mocha": "^2.2.5",
-    "sqlite3": "^3.0.8"
+    "bluebird": "^3.4.1",
+    "bookshelf": "^0.10.0",
+    "deep-diff": "^0.3.4",
+    "knex": "^0.11.7",
+    "mocha": "^2.5.3",
+    "sqlite3": "^3.1.4"
   },
   "peerDependencies": {
     "bluebird": "2.x",
