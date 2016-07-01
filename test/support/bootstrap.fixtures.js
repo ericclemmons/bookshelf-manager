@@ -16,7 +16,7 @@ module.exports = function(manager) {
       return type.save();
     })
     .then(function() {
-      return Promise.all(specs.invoke('save'));
+      return Promise.all(specs.invokeMap('save'));
     })
     .then(function() {
       return color.save();
@@ -31,7 +31,7 @@ module.exports = function(manager) {
       return model.specs().attach(specs.toArray());
     })
     .then(function() {
-      return Promise.all(features.invoke('save'));
+      return Promise.all(features.invokeMap('save'));
     })
     .then(function() {
       return dealer
