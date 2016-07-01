@@ -55,7 +55,7 @@
 
 ## Changelog
 
-- v0.2.0 - Several breaking changes occurred with this version due to updating `devDependencies` and `peerDependencies`:
+- v0.2.1 - Several breaking changes occurred with this version due to updating `devDependencies` and `peerDependencies`:
   - Knex and Bookshelf updated their `bluebird` and `lodash` dependencies
   - Knex changed how undefined values are inserted
 - v0.1.0 - Reimplement as a plugin for Bookshelf/Knex 0.8.x
