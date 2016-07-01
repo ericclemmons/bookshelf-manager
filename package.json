@@ -1,6 +1,6 @@
 {
   "name": "bookshelf-manager",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Easily wire up models to APIs with supported for complex, nested saving.",
   "main": "index.js",
   "scripts": {
