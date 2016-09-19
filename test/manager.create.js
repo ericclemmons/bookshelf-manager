@@ -253,9 +253,8 @@ describe('manager', function() {
               assert.equal('White', color.get('name'), 'Color name should be White');
               assert.equal('#fff', color.get('hex_value'), 'Color hex_value should be #fff');
             });
-          } else {
-            throw err;
           }
+          throw err;
         });
       });
     });

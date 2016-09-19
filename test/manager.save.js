@@ -182,9 +182,8 @@ describe('manager', function() {
             assert.equal(1, car.get('quantity', 'Car should have quantity 1, got: ' + car.get('quantity')));
             assert.equal(2, car.related('features').length, 'Car should have 2 existing features');
           });
-        } else {
-          throw err;
         }
+        throw err;
       });
     });
 
