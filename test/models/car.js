@@ -6,6 +6,10 @@ var Car = function(Bookshelf) {
       quantity: 0
     },
 
+    title: function() {
+      return this.hasOne('title', 'car_id');
+    },
+
     color: function() {
       return this.belongsTo('color');
     },

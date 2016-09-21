@@ -18,8 +18,8 @@ describe('manager', function() {
   });
 
   describe('.register', function() {
-    it('should return function', function() {
-      assert.equal('function', typeof manager.register(Model, 'fake'));
+    it('should return a function', function() {
+      assert.equal(typeof manager.register(Model, 'fake'), 'function');
     });
 
     it('must be called with both a Model and a model name', function() {

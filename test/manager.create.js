@@ -29,8 +29,8 @@ describe('manager', function() {
       return manager.create('car', {
         quantity: 1
       }).then(function(car) {
-        assert.equal(1, car.id, 'Car should have ID 1');
-        assert.equal(1, car.get('quantity'), 'Car should have quantity of 1');
+        assert.equal(car.id, 1, 'Car should have ID 1');
+        assert.equal(car.get('quantity'), 1, 'Car should have quantity of 1');
       });
     });
 
@@ -41,8 +41,8 @@ describe('manager', function() {
       ]).then(function(cars) {
         cars.sortBy('quantity');
 
-        assert.equal(2, cars.length, 'Cars collection should have 2 Car models');
-        assert.equal(2, cars.pluck('quantity').length, 'Quantities should be set');
+        assert.equal(cars.length, 2, 'Cars collection should have 2 Car models');
+        assert.equal(cars.pluck('quantity').length, 2, 'Quantities should be set');
       });
     });
 
@@ -54,11 +54,27 @@ describe('manager', function() {
         },
         quantity: 1
       }).then(function(car) {
-        assert.equal(1, car.id, 'Car should have ID 1, not ' + car.id);
-        assert.equal(1, car.get('quantity'), 'Car should have quantity of 1');
-        assert.equal(1, car.related('color').id, 'Color should have ID 1, not ' + car.related('color').id);
-        assert.equal('White', car.related('color').get('name'), 'Color name should be White');
-        assert.equal('#fff', car.related('color').get('hex_value'), 'Color hex_value should be #fff');
+        assert.equal(car.id, 1, 'Car should have ID 1, not ' + car.id);
+        assert.equal(car.get('quantity'), 1, 'Car should have quantity of 1');
+        assert.equal(car.related('color').id, 1, 'Color should have ID 1, not ' + car.related('color').id);
+        assert.equal(car.related('color').get('name'), 'White', 'Color name should be White');
+        assert.equal(car.related('color').get('hex_value'), '#fff', 'Color hex_value should be #fff');
+      });
+    });
+
+    it('should create a model within a new model (hasOne)', function() {
+      return manager.create('car', {
+        title: {
+          state: 'FL',
+          issue_date: '2017-01-01'
+        },
+        quantity: 1
+      }).then(function(car) {
+        assert.equal(car.id, 1, 'Car should have ID 1, not ' + car.id);
+        assert.equal(car.get('quantity'), 1, 'Car should have quantity of 1');
+        assert.equal(car.related('title').id, 1, 'Title should have ID 1, not ' + car.related('title').id);
+        assert.equal(car.related('title').get('state'), 'FL', 'Title state should be FL');
+        assert.equal(car.related('title').get('issue_date'), '2017-01-01', 'Title issue_date should be 2017-01-01');
       });
     });
 
@@ -75,9 +91,9 @@ describe('manager', function() {
           },
           quantity: 2
         }).then(function(car) {
-          assert.equal(color.id, car.related('color').id, 'Color ID should stay the same, not ' + car.related('color').id);
-          assert.equal('Grey', car.related('color').get('name'), 'Color name should be Grey');
-          assert.equal('#666', car.related('color').get('hex_value'), 'Color hex_value should be #666');
+          assert.equal(car.related('color').id, color.id, 'Color ID should stay the same, not ' + car.related('color').id);
+          assert.equal(car.related('color').get('name'), 'Grey', 'Color name should be Grey');
+          assert.equal(car.related('color').get('hex_value'), '#666', 'Color hex_value should be #666');
         });
       });
     });
@@ -92,9 +108,9 @@ describe('manager', function() {
       }).then(function(car) {
         car.related('features').sortBy('name');
 
-        assert.equal(1, car.id, 'Car should have ID 1');
-        assert.equal(2, car.related('features').length, 'There should be 2 features');
-        assert.equal(2, car.related('features').pluck('name').length, 'There should be 2 names');
+        assert.equal(car.id, 1, 'Car should have ID 1');
+        assert.equal(car.related('features').length, 2, 'There should be 2 features');
+        assert.equal(car.related('features').pluck('name').length, 2, 'There should be 2 names');
       });
     });
 
@@ -107,12 +123,12 @@ describe('manager', function() {
       }).then(function(make) {
         make.related('models').sortBy('name');
 
-        assert.equal(1, make.id, 'Make should have ID 1');
-        assert.equal(2, make.related('models').length);
+        assert.equal(make.id, 1, 'Make should have ID 1');
+        assert.equal(make.related('models').length, 2);
         assert.ok(make.related('models').at(0).id, 'Model #1 should have ID, not ' + make.related('models').at(0).id);
         assert.ok(make.related('models').at(1).id, 'Model #2 should have ID, not ' + make.related('models').at(1).id);
-        assert.equal('X3', make.related('models').at(0).get('name'), 'Model #1 name should be X3, not ' + make.related('models').at(0).get('name'));
-        assert.equal('X5', make.related('models').at(1).get('name'), 'Model #2 name should be X5, not ' + make.related('models').at(1).get('name'));
+        assert.equal(make.related('models').at(0).get('name'), 'X3', 'Model #1 name should be X3, not ' + make.related('models').at(0).get('name'));
+        assert.equal(make.related('models').at(1).get('name'), 'X5', 'Model #2 name should be X5, not ' + make.related('models').at(1).get('name'));
       });
     });
 
@@ -169,7 +185,7 @@ describe('manager', function() {
       });
 
       return manager.create(ValidatedModel, { name: 'test' }).then(function(model) {
-        assert.equal('test', model.get('name'), 'Model should have a name of `test`, not `' + model.get('name') + '`');
+        assert.equal(model.get('name'), 'test', 'Model should have a name of `test`, not `' + model.get('name') + '`');
       });
     });
 
@@ -183,7 +199,7 @@ describe('manager', function() {
           },
 
           validateSave: function() {
-            assert.equal('number', typeof this.get('make_id'), 'Model make_id must be a number, not ' + typeof this.get('make_id'));
+            assert.equal(typeof this.get('make_id'), 'number', 'Model make_id must be a number, not ' + typeof this.get('make_id'));
           }
         }), 'model');
         return Bootstrap.tables(manager).then(function() {
@@ -211,7 +227,7 @@ describe('manager', function() {
           },
 
           validateSave: function() {
-            assert.equal('number', typeof this.get('make_id'), 'Model make_id must be a number, not ' + typeof this.get('make_id'));
+            assert.equal(typeof this.get('make_id'), 'number', 'Model make_id must be a number, not ' + typeof this.get('make_id'));
           }
         }), 'model');
         return Bootstrap.tables(manager).then(function() {
@@ -242,16 +258,16 @@ describe('manager', function() {
           }, {
             transacting: t
           }).then(function(car) {
-            assert.equal(color.id, car.related('color').id, 'Color ID should stay the same, not ' + car.related('color').id);
-            assert.equal('Grey', car.related('color').get('name'), 'Color name should be Grey');
-            assert.equal('#666', car.related('color').get('hex_value'), 'Color hex_value should be #666');
+            assert.equal(car.related('color').id, color.id, 'Color ID should stay the same, not ' + car.related('color').id);
+            assert.equal(car.related('color').get('name'), 'Grey', 'Color name should be Grey');
+            assert.equal(car.related('color').get('hex_value'), '#666', 'Color hex_value should be #666');
             throw new Error('test');
           });
         }).catch(function(err) {
           if (!(err instanceof assert.AssertionError)) {
             return manager.fetch('color', { id: color.id }).then(function(color) {
-              assert.equal('White', color.get('name'), 'Color name should be White');
-              assert.equal('#fff', color.get('hex_value'), 'Color hex_value should be #fff');
+              assert.equal(color.get('name'), 'White', 'Color name should be White');
+              assert.equal(color.get('hex_value'), '#fff', 'Color hex_value should be #fff');
             });
           }
           throw err;

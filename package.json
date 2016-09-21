@@ -1,6 +1,6 @@
 {
   "name": "bookshelf-manager",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Easily wire up models to APIs with supported for complex, nested saving.",
   "main": "index.js",
   "scripts": {
@@ -26,13 +26,13 @@
     "bluebird": "^3.4.1",
     "bookshelf": "^0.10.0",
     "deep-diff": "^0.3.4",
-    "knex": "^0.11.7",
-    "mocha": "^2.5.3",
+    "knex": "^0.12.1",
+    "mocha": "^3.0.2",
     "sqlite3": "^3.1.4"
   },
   "peerDependencies": {
     "bluebird": "3.x",
     "bookshelf": "^0.10.0",
-    "knex": "^0.11.0"
+    "knex": "^0.11.0 || ^0.12.0"
   }
 }

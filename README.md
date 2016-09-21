@@ -55,6 +55,7 @@
 
 ## Changelog
 
+- v0.3.0 - Add `setHasOne` functionality (#12)
 - v0.2.1 - Several breaking changes occurred with this version due to updating `devDependencies` and `peerDependencies`:
   - Knex and Bookshelf updated their `bluebird` and `lodash` dependencies
   - Knex changed how undefined values are inserted

@@ -71,6 +71,14 @@ module.exports = function(manager) {
         table.increments('id');
         table.string('name');
       });
+    })
+    .then(function() {
+      return schema.createTableIfNotExists('titles', function(table) {
+        table.increments('id');
+        table.integer('car_id');
+        table.text('state');
+        table.text('issue_date');
+      });
     });
   });
 };

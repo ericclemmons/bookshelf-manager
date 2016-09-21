@@ -8,6 +8,7 @@ module.exports = function(manager) {
   var specs     = manager.forge('specs',   [ { name: '4 door' }, { name: 'v6' } ]);
   var color     = manager.forge('color',   { name: 'Grey', hex_value: '#666' });
   var dealer    = manager.forge('dealer',  { name: 'Houston', zip_code: '77002' });
+  var title     = manager.forge('title',   { state: 'TX', issue_date: '2016-09-19'});
   var features  = manager.forge('features', [ { name: 'GPS', cost: '500' }, { name: 'ABS', cost: '1250' }]);
   var car       = manager.forge('car');
 
@@ -46,6 +47,10 @@ module.exports = function(manager) {
       car.set('quantity',   1);
 
       return car.save();
+    })
+    .then(function() {
+      return title.set('car_id', car.get('id'))
+      .save();
     })
     .then(function() {
       return car.features().attach(features.toArray());

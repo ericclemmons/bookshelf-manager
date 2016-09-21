@@ -17,8 +17,8 @@ describe('manager', function() {
       });
 
       assert.ok(manager.isModel(make), 'Expected a Model');
-      assert.equal(undefined, make.get('id'), 'ID should not be defined yet');
-      assert.equal('Ford', make.get('name'), 'Name should be set');
+      assert.equal(make.get('id'), undefined, 'ID should not be defined yet');
+      assert.equal(make.get('name'), 'Ford', 'Name should be set');
     });
   });
 });

@@ -21,7 +21,7 @@ describe('manager', function() {
         })
         .then(function(make) {
           assert.ok(make instanceof manager.bookshelf.Model);
-          assert.equal('BMW', make.get('name'));
+          assert.equal(make.get('name'), 'BMW');
         });
     });
 
@@ -30,8 +30,8 @@ describe('manager', function() {
         .fetch('makes')
         .then(function(makes) {
           assert.ok(makes instanceof manager.bookshelf.Collection);
-          assert.equal(1, makes.length);
-          assert.equal('BMW', makes.get(1).get('name'));
+          assert.equal(makes.length, 1);
+          assert.equal(makes.get(1).get('name'), 'BMW');
         });
     });
 
@@ -44,6 +44,7 @@ describe('manager', function() {
           'models.type',
           'dealers',
           'dealers.cars',
+          'dealers.cars.title',
           'dealers.cars.color',
           'dealers.cars.model',
           'dealers.cars.features',
@@ -52,14 +53,15 @@ describe('manager', function() {
         .then(function(make) {
           var json = make.toJSON();
 
-          assert.equal('BMW',       json.name);
-          assert.equal('X5',        json.models[0].name);
-          assert.equal(2,           json.models[0].specs.length);
-          assert.equal('Crossover', json.models[0].type.name);
-          assert.equal('Houston',   json.dealers[0].name);
-          assert.equal('Grey',      json.dealers[0].cars[0].color.name);
-          assert.equal('X5',        json.dealers[0].cars[0].model.name);
-          assert.equal(2,           json.dealers[0].cars[0].features.length);
+          assert.equal(json.name, 'BMW');
+          assert.equal(json.models[0].name, 'X5');
+          assert.equal(json.models[0].specs.length, 2);
+          assert.equal(json.models[0].type.name, 'Crossover');
+          assert.equal(json.dealers[0].name, 'Houston');
+          assert.equal(json.dealers[0].cars[0].title.state, 'TX');
+          assert.equal(json.dealers[0].cars[0].color.name, 'Grey');
+          assert.equal(json.dealers[0].cars[0].model.name, 'X5');
+          assert.equal(json.dealers[0].cars[0].features.length, 2);
         });
       });
     });

@@ -33,13 +33,13 @@ describe('manager', function() {
         it('should return a Model', function() {
           var Model = bookshelf.Model.extend({});
 
-          assert.equal(Model, manager.get(Model));
+          assert.equal(manager.get(Model), Model);
         });
 
         it('should return a Collection', function() {
           var Collection = bookshelf.Collection.extend();
 
-          assert.equal(Collection, manager.get(Collection));
+          assert.equal(manager.get(Collection), Collection);
         });
       });
     });
@@ -73,13 +73,13 @@ describe('manager', function() {
         it('should return a Model', function() {
           var Model = bookshelf.Model.extend({});
 
-          assert.equal(Model, manager.get(Model));
+          assert.equal(manager.get(Model), Model);
         });
 
         it('should return a Collection', function() {
           var Collection = bookshelf.Collection.extend();
 
-          assert.equal(Collection, manager.get(Collection));
+          assert.equal(manager.get(Collection), Collection);
         });
       });
     });
