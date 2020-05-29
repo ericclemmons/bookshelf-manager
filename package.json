@@ -28,7 +28,7 @@
     "deep-diff": "^0.3.4",
     "knex": "^0.12.1",
     "mocha": "^3.0.2",
-    "sqlite3": "^3.1.4"
+    "sqlite3": "^4.2.0"
   },
   "peerDependencies": {
     "bluebird": "3.x",
