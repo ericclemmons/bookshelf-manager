@@ -18,7 +18,7 @@ describe('manager', function() {
       describe('with a name', function() {
         describe('if the model hasn\'t been registered yet', function() {
           it('should throw an error', function() {
-            assert.throws(function() { manager.get('fake'); }, 'No model named `fake` has been registered and no model directory was specified');
+            assert.throws(function() { manager.get('fake'); }, /No model named `fake` has been registered and no model directory was specified/);
           });
         });
 
